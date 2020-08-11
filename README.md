@@ -4,6 +4,7 @@ Interface to visualize CNN predictions of digits drawn by the user.
 <p align="center">
     <img width="400" height="400"src="images/digit_recognizer.gif">
 </p>
+The top-left square is the canvas, in which a number between 0 and 9 is expected. The top-right shows the input to the CNN: the drawing has been reduced to have a size 28x28. The bottom plot shows the probabilities predicted by the CNN.
 
 
 
