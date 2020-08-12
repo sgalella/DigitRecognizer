@@ -1,4 +1,11 @@
+import random
 import tensorflow as tf
+from numpy.random import seed
+
+# Random seed (for reproducibility)
+tf.random.set_seed(1234)
+seed(1234)
+random.seed(1234)
 
 # Load the dataset
 mnist = tf.keras.datasets.mnist
