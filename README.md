@@ -31,4 +31,4 @@ python digit_recognizer.py
 ```python
 python cnn_model.py
 ```
-
+`prediction/` stores the input and the scores for the last prediction.
