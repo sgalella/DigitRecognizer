@@ -16,6 +16,8 @@ To install the dependencies, run the following command:
 pip install -r requirements.txt
 ```
 
+Current version has been tested on Python 3.7.7. Changes in the GUI appearance may happen in lower versions.
+
 
 
 ## Usage
