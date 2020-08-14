@@ -6,7 +6,14 @@ from matplotlib.figure import Figure
 
 
 class Window(tk.Frame):
+    """ Creates the GUI """
     def __init__(self, parent, *args, **kwargs):
+        """
+        Initializes the window.
+
+        Args:
+            parent (tk.Tk): Tk root.
+        """
         tk.Frame.__init__(self, parent, *args, **kwargs)
         self.parent = parent
         self.parent.title("Digit Recognizer")
@@ -30,11 +37,13 @@ class Window(tk.Frame):
         self.pack()
 
     def clear(self):
+        """ Removes the contents from the drawing, the input and the plot canvas. """
         self.number_canvas.delete('all')
         self.input_canvas.delete('all')
         self.barplot_canvas.delete('all')
 
     def predict(self):
+        """ Inputs the image to the network for predicting the number. """
         self.number_canvas.postscript(file='prediction/result.eps')
         img_gray = Image.open('prediction/result.eps').convert('L')
         img_res = img_gray.resize((28, 28))
@@ -46,6 +55,12 @@ class Window(tk.Frame):
         self.show_barplot(score[0])
 
     def show_img(self, img):
+        """
+        Displays the input image.
+
+        Args:
+            img (np.array): Input array rescaled to 28x28.
+        """
         fig = Figure(figsize=(3, 3))
         ax = fig.gca()
         ax.imshow(img)
@@ -54,6 +69,12 @@ class Window(tk.Frame):
         self.input_canvas.display('prediction/result.png')
 
     def show_barplot(self, score):
+        """
+        Displays the barplot of scores.
+
+        Args:
+            score (list): Probability for each of the numbers.
+        """
         fig = Figure(figsize=(4, 2))
         ax = fig.gca()
         ax.bar(range(len(score)), score)
@@ -64,25 +85,51 @@ class Window(tk.Frame):
 
 
 class DrawCanvas(tk.Canvas):
-    r = 10
+    """ Drawing window. """
+    r = 10  # Stroke size
     color = 'black'
 
     def __init__(self, parent, *args, **kwargs):
+        """
+        Initializes the drawing canvas.
+
+        Args:
+            parent (tk.Frame): Main GUI.
+        """
         tk.Canvas.__init__(self, parent, *args, **kwargs)
         self.bind('<B1-Motion>', self.draw)
 
     def draw(self, event):
+        """
+        Draws a circle on click event.
+
+        Args:
+            event (tk.Event): Click position.
+        """
         color = 'black'
         self.create_oval(event.x - self.r, event.y - self.r, event.x + self.r, event.y + self.r,
                          fill=color, outline=color)
 
 
 class DisplayCanvas(tk.Canvas):
+    """ Network input window. """
     def __init__(self, parent, *args, **kwargs):
+        """
+        Initializes the display canvas.
+
+        Args:
+            parent (tk.Frame): Main GUI.
+        """
         tk.Canvas.__init__(self, parent, *args, **kwargs)
         self.image_canvas = None
 
     def display(self, img):
+        """
+        Plots the image in the canvas.
+
+        Args:
+            img (np.array): Input array rescaled to 28x28.
+        """
         self.image_canvas = ImageTk.PhotoImage(Image.open(img))
         self.create_image(0, 0, anchor='nw', image=self.image_canvas)
 
