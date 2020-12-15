@@ -1,5 +1,4 @@
 import tkinter as tk
-import tensorflow as tf
 import numpy as np
 from PIL import Image, ImageTk
 from matplotlib.figure import Figure
@@ -7,7 +6,7 @@ from matplotlib.figure import Figure
 
 class Window(tk.Frame):
     """ Creates the GUI """
-    def __init__(self, parent, *args, **kwargs):
+    def __init__(self, parent, model, *args, **kwargs):
         """
         Initializes the window.
 
@@ -16,6 +15,7 @@ class Window(tk.Frame):
         """
         tk.Frame.__init__(self, parent, *args, **kwargs)
         self.parent = parent
+        self.model = model
         self.parent.title("Digit Recognizer")
         self.parent.resizable(False, False)
 
@@ -51,7 +51,7 @@ class Window(tk.Frame):
         self.show_img(img)
         img = np.expand_dims(img, axis=0)
         img = np.expand_dims(img, axis=-1)
-        score = model.predict(img)
+        score = self.model.predict(img)
         self.show_barplot(score[0])
 
     def show_img(self, img):
@@ -132,10 +132,3 @@ class DisplayCanvas(tk.Canvas):
         """
         self.image_canvas = ImageTk.PhotoImage(Image.open(img))
         self.create_image(0, 0, anchor='nw', image=self.image_canvas)
-
-
-if __name__ == '__main__':
-    root = tk.Tk()
-    model = tf.keras.models.load_model('model/model.h5')
-    window = Window(root, width=420, height=450)
-    root.mainloop()

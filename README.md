@@ -25,12 +25,12 @@ Current version has been tested on Python 3.7.7. Changes in the GUI appearance m
 To run the GUI:
 
 ```python
-python digit_recognizer.py
+python -m digit_recognizer
 ```
 
-`model/` contains a trained CNN. You change the architecture or the parameters in `cnn_model.py`. To train it run:
+`digit_recognizer/model/` contains a trained CNN. You change the architecture or the parameters in `digit_recognizer/cnn_model.py`. To train it run:
 
 ```python
-python cnn_model.py
+python digit_recognizer/cnn_model.py
 ```
 `prediction/` stores the input and the scores for the last prediction.
