@@ -9,15 +9,23 @@ The top-left square is the canvas, in which a number between 0 and 9 is expected
 
 
 ## Installation
-
-To install the dependencies, run the following command:
+The code was tested using Python 3.6.10. To install the necessary packages run:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Current version has been tested on Python 3.7.7. Changes in the GUI appearance may happen in lower versions.
+If using Conda, you can also create an environment with the requirements:
 
+```bash
+conda env create -f environment.yml
+```
+
+By default the environment name is `digit-recognizer`. To activate it run:
+
+```bash
+conda activate digit-recognizer
+```
 
 
 ## Usage
